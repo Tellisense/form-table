@@ -4,7 +4,6 @@ import Form from './components/Form'
 import Table from './components/Table'
 
 const initialForm = {
-  id: "",
   username: "",
   email: "",
   "website": "",
@@ -14,7 +13,6 @@ const initialForm = {
 }
 
 function App() {
-  const [called, setCalled] = useState(false)
   const [tableData, setTableData] = useState([])
   const [formData, setFormData] = useState(initialForm)
 
@@ -22,18 +20,14 @@ function App() {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        if (!called) {
-          const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
-          setTableData(data)
-        }
-        setCalled(true)
-
+        const { data } = await axios.get('https://jsonplaceholder.typicode.com/users')
+        setTableData(data)
       } catch (error) {
-        console.log(`api call error`, error)
+        console.log(`api call error: `, error)
       }
     }
     apiCall()
-  }, [called])
+  }, [])
 
   const handleChange = (e) => {
     if (e.target.name === 'city') {
@@ -53,7 +47,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setTableData([{ ...formData, id: Math.floor(Math.random() * 1000), }, ...tableData])
+    setTableData([formData, ...tableData])
     setFormData(initialForm)
 
   }

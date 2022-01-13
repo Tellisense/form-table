@@ -14,9 +14,9 @@ const Table = ({ tableData }) => {
 
         </thead>
         <tbody>
-          {tableData?.map((item) => {
+          {tableData?.map((item, index) => {
             return (
-              <tr key={item.id}>
+              <tr key={index}>
                 <td>{item.username}</td>
                 <td>{item.email}</td>
                 <td>{item.website}</td>
