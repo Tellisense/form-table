@@ -49,7 +49,6 @@ function App() {
     e.preventDefault()
     setTableData([formData, ...tableData])
     setFormData(initialForm)
-
   }
 
   return (
